@@ -2,6 +2,7 @@ import vk_api
 import time
 import random
 
+
 def intro():
     print("")
     print("     **********************************************************          ")
@@ -11,6 +12,11 @@ def intro():
     print("")
     print("     **********************************************************          ")
     print("")
+
+
+def captcha_handler(captcha):
+    key = input("Введи код капчи {0}: ".format(captcha.get_url())).strip()
+    return captcha.try_again(key)
 
 
 def func():
@@ -25,7 +31,7 @@ def func():
         comms = input("Сколько накрутить комментариев: ")
         times = input("Введите задержку перед отправкой комментария: ")
 
-        session = vk_api.VkApi(token=token)
+        session = vk_api.VkApi(token=token,captcha_handler=captcha_handler)
 
         comms = int(comms)
         num = 0
